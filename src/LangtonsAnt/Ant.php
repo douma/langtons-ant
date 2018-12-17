@@ -65,9 +65,9 @@ class Ant implements AntInterface
     private function correctDegrees() : void
     {
         if($this->degrees < 0) {
-            $this->degrees = $this->degrees + 360;
+            $this->degrees += 360;
         } elseif($this->degrees > 360) {
-            $this->degrees = $this->degrees - 360;
+            $this->degrees -= 360;
         }
     }
 }
