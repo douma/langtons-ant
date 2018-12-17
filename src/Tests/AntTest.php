@@ -13,15 +13,7 @@ final class AntTest extends TestCase
 
     public function setUp()
     {
-        $this->sut = new \LangtonsAnt\Ant(new ImmutablePosition(0,0), 0);
-    }
-
-    /**
-     * @expectedException LogicException
-     */
-    public function test_should_throw_logicException_on_invalid_degrees()
-    {
-        new \LangtonsAnt\Ant(new ImmutablePosition(0,0), 50);
+        $this->sut = new \LangtonsAnt\Ant(new ImmutablePosition(0,0), new \LangtonsAnt\ValueObjects\TurnDegree(0));
     }
 
     public function test_move_left_4_times_should_be_one_rotation()

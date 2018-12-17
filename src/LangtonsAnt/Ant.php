@@ -1,14 +1,13 @@
 <?php
 
 namespace LangtonsAnt;
-use LangtonsAnt\Contracts\AntInterface;
-use LangtonsAnt\Contracts\PositionInterface;
-use LangtonsAnt\Exceptions\InvalidDegreesException;
+use LangtonsAnt\Contracts\{AntInterface, PositionInterface};
+use LangtonsAnt\ValueObjects\TurnDegree;
 
 class Ant implements AntInterface
 {
     private $position;
-    private $degrees;
+    private $degree;
     private $eventHistory = [];
     private $degreeMapping = [
         0=>'up',
@@ -18,29 +17,24 @@ class Ant implements AntInterface
         360=>'up'
     ];
 
-    public function __construct(PositionInterface $position, int $degrees)
+    public function __construct(PositionInterface $position, TurnDegree $degree)
     {
         $this->position = $position;
-        $this->degrees = $degrees;
+        $this->degree = $degree;
         $this->eventHistory[] = $position;
 
         $allowedDegrees = array_keys($this->degreeMapping);
-        if(!in_array($degrees, $allowedDegrees)) {
-            throw InvalidDegreesException::forDegrees($degrees, $allowedDegrees);
-        }
     }
 
     public function forwardLeft() : void
     {
-        $this->degrees -= 90;
-        $this->correctDegrees();
+        $this->degree = new TurnDegree($this->degree->getDegree() - 90);
         $this->updatePosition();
     }
 
     public function forwardRight() : void
     {
-        $this->degrees += 90;
-        $this->correctDegrees();
+        $this->degree = new TurnDegree($this->degree->getDegree() + 90);
         $this->updatePosition();
     }
 
@@ -57,17 +51,8 @@ class Ant implements AntInterface
     private function updatePosition() : void
     {
         $map = $this->degreeMapping;
-        $direction = $map[$this->degrees];
+        $direction = $map[$this->degree->getDegree()];
         $this->position = $this->position->{$direction}(1);
         $this->eventHistory[] = $this->position;
-    }
-
-    private function correctDegrees() : void
-    {
-        if($this->degrees < 0) {
-            $this->degrees += 360;
-        } elseif($this->degrees > 360) {
-            $this->degrees -= 360;
-        }
     }
 }
