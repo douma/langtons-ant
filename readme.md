@@ -1,7 +1,6 @@
 # Langton's ant
 
-> Langton's ant after 11,000 steps. A red pixel shows the ant's location.
-Langton's ant is a two-dimensional universal Turing machine with a very simple set of rules but complex emergent behavior.
+> Langton's ant is a two-dimensional universal Turing machine with a very simple set of rules but complex emergent behavior
 
 > *Source: https://en.wikipedia.org/wiki/Langton%27s_ant*
 
