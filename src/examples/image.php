@@ -6,7 +6,7 @@ use LangtonsAnt\Contracts\BoardInterface;
 header('Content-type: image/png');
 require __DIR__ . "/../../vendor/autoload.php";
 
-$ant = new Ant(new ImmutablePosition(250,250), 0);
+$ant = new Ant(new ImmutablePosition(250,250), new \LangtonsAnt\ValueObjects\TurnDegree(0));
 $board = new Board($ant);
 
 $count = 0;
