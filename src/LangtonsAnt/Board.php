@@ -22,10 +22,10 @@ class Board implements BoardInterface
 
         if($this->isMarked($antPosition)) {
             $this->unmarkPosition($antPosition);
-            $this->ant->moveLeft();
+            $this->ant->forwardLeft();
         } else {
             $this->markPosition($antPosition);
-            $this->ant->moveRight();
+            $this->ant->forwardRight();
         }
     }
 

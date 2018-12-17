@@ -29,14 +29,14 @@ class Ant implements AntInterface
         }
     }
 
-    public function moveLeft() : void
+    public function forwardLeft() : void
     {
         $this->degrees -= 90;
         $this->correctDegrees();
         $this->updatePosition();
     }
 
-    public function moveRight() : void
+    public function forwardRight() : void
     {
         $this->degrees += 90;
         $this->correctDegrees();

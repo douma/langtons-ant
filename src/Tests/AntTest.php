@@ -26,10 +26,10 @@ final class AntTest extends TestCase
 
     public function test_move_left_4_times_should_be_one_rotation()
     {
-        $this->sut->moveLeft();
-        $this->sut->moveLeft();
-        $this->sut->moveLeft();
-        $this->sut->moveLeft();
+        $this->sut->forwardLeft();
+        $this->sut->forwardLeft();
+        $this->sut->forwardLeft();
+        $this->sut->forwardLeft();
 
         $history = $this->sut->getEventHistory();
         $this->assertEquals(new ImmutablePosition(-1, 0), $history[0]);
@@ -40,10 +40,10 @@ final class AntTest extends TestCase
 
     public function test_move_right_4_times_should_be_one_rotation()
     {
-        $this->sut->moveRight();
-        $this->sut->moveRight();
-        $this->sut->moveRight();
-        $this->sut->moveRight();
+        $this->sut->forwardRight();
+        $this->sut->forwardRight();
+        $this->sut->forwardRight();
+        $this->sut->forwardRight();
 
         $history = $this->sut->getEventHistory();
         $this->assertEquals(new ImmutablePosition(1, 0), $history[0]);
