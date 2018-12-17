@@ -32,15 +32,15 @@ class Ant implements AntInterface
     public function moveLeft() : void
     {
         $this->degrees -= 90;
-        $this->_correctDegrees();
-        $this->_updatePosition();
+        $this->correctDegrees();
+        $this->updatePosition();
     }
 
     public function moveRight() : void
     {
         $this->degrees += 90;
-        $this->_correctDegrees();
-        $this->_updatePosition();
+        $this->correctDegrees();
+        $this->updatePosition();
     }
 
     public function getCurrentPosition() : PositionInterface
@@ -53,7 +53,7 @@ class Ant implements AntInterface
         return $this->eventHistory;
     }
 
-    private function _updatePosition() : void
+    private function updatePosition() : void
     {
         $map = $this->degreeMapping;
         $direction = $map[$this->degrees];
@@ -61,7 +61,7 @@ class Ant implements AntInterface
         $this->eventHistory[] = $this->position;
     }
 
-    private function _correctDegrees() : void
+    private function correctDegrees() : void
     {
         if($this->degrees < 0) {
             $this->degrees = $this->degrees + 360;
