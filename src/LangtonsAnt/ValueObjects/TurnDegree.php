@@ -29,7 +29,7 @@ class TurnDegree
         if($this->degree < 0) {
             $this->degree += 360;
         } elseif($this->degree > 360) {
-            $this->degree -= 360;
+            $this->degree %= 360;
         }
     }
 }
