@@ -22,6 +22,7 @@ class Ant implements AntInterface
     {
         $this->position = $position;
         $this->degrees = $degrees;
+        $this->eventHistory[] = $position;
 
         $allowedDegrees = array_keys($this->degreeMapping);
         if(!in_array($degrees, $allowedDegrees)) {
