@@ -43,6 +43,11 @@ class Ant implements AntInterface
         return $this->position;
     }
 
+    public function getCurrentDegree() : TurnDegree 
+    {
+        return $this->degree;
+    }
+
     public function getEventHistory() : iterable
     {
         return $this->eventHistory;
