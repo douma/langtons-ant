@@ -19,6 +19,11 @@ class TurnDegree
         }
     }
 
+    public function sameAs(TurnDegree $degree) : bool
+    {
+        return $this === $degree;
+    }
+
     public function getDegree() : int
     {
         return $this->degree;

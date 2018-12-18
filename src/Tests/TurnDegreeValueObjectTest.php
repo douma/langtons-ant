@@ -26,4 +26,12 @@ final class TurnDegreeValueObjectTest extends TestCase
         $this->assertEquals(0, (new \LangtonsAnt\ValueObjects\TurnDegree(3600))->getDegree());
         $this->assertEquals(90, (new \LangtonsAnt\ValueObjects\TurnDegree(3600 + 90))->getDegree());
     }
+
+    public function test_same_as()
+    {
+        $degree = new \LangtonsAnt\ValueObjects\TurnDegree(90);
+        $this->assertFalse($degree->sameAs(new \LangtonsAnt\ValueObjects\TurnDegree(180)));
+        $this->assertFalse($degree->sameAs(new \LangtonsAnt\ValueObjects\TurnDegree(360 + 90)));
+        $this->assertFalse($degree->sameAs(new \LangtonsAnt\ValueObjects\TurnDegree(90)));
+    }
 }
