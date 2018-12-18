@@ -1,10 +1,10 @@
 <?php
 
-namespace LangtonsAnt;
+namespace LangtonsAnt\ValueObjects;
 
 use LangtonsAnt\Contracts\PositionInterface;
 
-class ImmutablePosition implements PositionInterface
+class Position implements PositionInterface
 {
     private $x, $y;
 

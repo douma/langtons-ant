@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use LangtonsAnt\Contracts\PositionInterface;
-use LangtonsAnt\ImmutablePosition;
+use LangtonsAnt\ValueObjects\Position;
 use LangtonsAnt\ValueObjects\TurnDegree;
 
 final class TurnDegreeValueObjectTest extends TestCase
@@ -14,7 +14,7 @@ final class TurnDegreeValueObjectTest extends TestCase
     {
         new TurnDegree(88);
     }
-    
+
     public function test_same_as()
     {
         $degree = new TurnDegree(90);

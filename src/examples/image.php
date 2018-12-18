@@ -1,12 +1,12 @@
 <?php
 
-use LangtonsAnt\{Ant, ImmutablePosition, Board};
+use LangtonsAnt\{Ant, Position, Board};
 use LangtonsAnt\Contracts\BoardInterface;
 
 header('Content-type: image/png');
 require __DIR__ . "/../../vendor/autoload.php";
 
-$ant = new Ant(new ImmutablePosition(250,250), new \LangtonsAnt\ValueObjects\TurnDegree(0));
+$ant = new Ant(new Position(250,250), new \LangtonsAnt\ValueObjects\TurnDegree(0));
 $board = new Board($ant);
 
 $count = 0;
