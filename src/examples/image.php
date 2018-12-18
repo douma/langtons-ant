@@ -1,6 +1,7 @@
 <?php
 
-use LangtonsAnt\{Ant, Position, Board};
+use LangtonsAnt\{Ant, Board};
+use LangtonsAnt\ValueObjects\Position;
 use LangtonsAnt\Contracts\BoardInterface;
 
 header('Content-type: image/png');
