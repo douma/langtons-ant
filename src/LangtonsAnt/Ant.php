@@ -28,13 +28,13 @@ class Ant implements AntInterface
 
     public function forwardLeft() : void
     {
-        $this->degree = new TurnDegree($this->degree->getDegree() - 90);
+        $this->degree = $this->degree->min(new TurnDegree(90));
         $this->updatePosition();
     }
 
     public function forwardRight() : void
     {
-        $this->degree = new TurnDegree($this->degree->getDegree() + 90);
+        $this->degree = $this->degree->add(new TurnDegree(90));
         $this->updatePosition();
     }
 
@@ -51,7 +51,7 @@ class Ant implements AntInterface
     private function updatePosition() : void
     {
         $map = $this->degreeMapping;
-        $direction = $map[$this->degree->getDegree()];
+        $direction = $map[(string) $this->degree];
         $this->position = $this->position->{$direction}(1);
         $this->eventHistory[] = $this->position;
     }

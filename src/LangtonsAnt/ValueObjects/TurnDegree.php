@@ -11,9 +11,8 @@ class TurnDegree
     public function __construct(int $degree)
     {
         $this->degree = $degree;
-        $this->correctDegree();
 
-        if(!in_array($this->degree, [0,90,180,270,360]))
+        if(!in_array(abs($this->degree), [0,90,180,270,360]))
         {
             throw InvalidTurnDegreeException::forDegrees($degree);
         }
@@ -21,20 +20,27 @@ class TurnDegree
 
     public function sameAs(TurnDegree $degree) : bool
     {
-        return $this === $degree;
+        $normalizeFrom = ($degree->degree + 360) % 360;
+        $normalizeTo = ($this->degree + 360) % 360;
+        return $normalizeFrom == $normalizeTo;
     }
 
-    public function getDegree() : int
+    public function add(TurnDegree $degree) : TurnDegree
     {
-        return $this->degree;
+        $new = $this->degree + $degree->degree;
+        $normalize = ($new + 360) % 360;
+        return new TurnDegree(abs($normalize));
     }
 
-    private function correctDegree() : void
+    public function min(TurnDegree $degree) : TurnDegree
     {
-        if($this->degree < 0) {
-            $this->degree += 360;
-        } elseif($this->degree > 360) {
-            $this->degree %= 360;
-        }
+        $new = $this->degree - $degree->degree;
+        $normalize = ($new + 360) % 360;
+        return new TurnDegree($normalize);
+    }
+
+    public function __toString() : string
+    {
+        return (string) $this->degree;
     }
 }

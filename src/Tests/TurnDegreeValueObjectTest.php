@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use LangtonsAnt\Contracts\PositionInterface;
 use LangtonsAnt\ImmutablePosition;
+use LangtonsAnt\ValueObjects\TurnDegree;
 
 final class TurnDegreeValueObjectTest extends TestCase
 {
@@ -11,27 +12,33 @@ final class TurnDegreeValueObjectTest extends TestCase
      */
     public function test_throw_exception_only_turnable_degrees_allowed()
     {
-        new \LangtonsAnt\ValueObjects\TurnDegree(88);
+        new TurnDegree(88);
     }
-
-    public function test_throw_no_exception()
-    {
-        $this->assertEquals(0, (new \LangtonsAnt\ValueObjects\TurnDegree(0))->getDegree());
-        $this->assertEquals(90, (new \LangtonsAnt\ValueObjects\TurnDegree(90))->getDegree());
-        $this->assertEquals(180, (new \LangtonsAnt\ValueObjects\TurnDegree(180))->getDegree());
-        $this->assertEquals(270, (new \LangtonsAnt\ValueObjects\TurnDegree(270))->getDegree());
-        $this->assertEquals(360, (new \LangtonsAnt\ValueObjects\TurnDegree(360))->getDegree());
-        $this->assertEquals(270, (new \LangtonsAnt\ValueObjects\TurnDegree(-90))->getDegree());
-        $this->assertEquals(180, (new \LangtonsAnt\ValueObjects\TurnDegree(-180))->getDegree());
-        $this->assertEquals(0, (new \LangtonsAnt\ValueObjects\TurnDegree(3600))->getDegree());
-        $this->assertEquals(90, (new \LangtonsAnt\ValueObjects\TurnDegree(3600 + 90))->getDegree());
-    }
-
+    
     public function test_same_as()
     {
-        $degree = new \LangtonsAnt\ValueObjects\TurnDegree(90);
-        $this->assertFalse($degree->sameAs(new \LangtonsAnt\ValueObjects\TurnDegree(180)));
-        $this->assertFalse($degree->sameAs(new \LangtonsAnt\ValueObjects\TurnDegree(360 + 90)));
-        $this->assertFalse($degree->sameAs(new \LangtonsAnt\ValueObjects\TurnDegree(90)));
+        $degree = new TurnDegree(90);
+        $degree2 = new TurnDegree(270);
+        $degree3 = new TurnDegree(0);
+        $this->assertTrue($degree->sameAs(new TurnDegree(-270)));
+        $this->assertTrue($degree->sameAs(new TurnDegree(90)));
+        $this->assertTrue($degree2->sameAs(new TurnDegree(-90)));
+        $this->assertTrue($degree3->sameAs(new TurnDegree(360)));
+    }
+
+    public function test_min()
+    {
+        $degree = new TurnDegree(180);
+        $this->assertEquals(new TurnDegree(0), $degree->min(new TurnDegree(180)));
+        $this->assertEquals(new TurnDegree(90), $degree->min(new TurnDegree(90)));
+        $this->assertEquals(new TurnDegree(270), $degree->min(new TurnDegree(270)));
+    }
+
+    public function test_plus()
+    {
+        $degree = new TurnDegree(180);
+        $this->assertEquals(new TurnDegree(0), $degree->add(new TurnDegree(180)));
+        $this->assertEquals(new TurnDegree(270), $degree->add(new TurnDegree(90)));
+        $this->assertEquals(new TurnDegree(90), $degree->add(new TurnDegree(270)));
     }
 }
