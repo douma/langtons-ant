@@ -33,3 +33,10 @@ public function moveAnt() : void
 To see the output of the Langton's ant, start the following PHP server:
 
 `php -S localhost:1234 src/examples/image.php`
+
+## Run docker
+
+`docker build -t langton .`
+`docker run -d -p 8080:8080 langton`
+
+Visit `localhost:8080`
