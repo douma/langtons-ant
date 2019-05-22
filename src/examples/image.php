@@ -27,7 +27,7 @@ function parseImage(BoardInterface $board) : void
     $img = imagecreatetruecolor($width, $height);
     $white = imagecolorallocate($img, 255, 255, 255);
 
-    imagestring($img, 5, 0, 0, $_SERVER['REMOTE_ADDR'], $white);
+    imagestring($img, 5, 0, 0, gethostname(), $white);
 
     /**
      * @var $position \LangtonsAnt\Contracts\PositionInterface
