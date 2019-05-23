@@ -9,23 +9,26 @@ use LangtonsAnt\Contracts\PositionInterface;
 class Board implements BoardInterface
 {
     private $ant;
+    private $length;
     private $marked = [];
 
-    public function __construct(AntInterface $ant)
+    public function __construct(AntInterface $ant, int $length)
     {
         $this->ant = $ant;
+        $this->length = $length;
     }
 
     public function moveAnt() : void
     {
-        $antPosition = $this->ant->getCurrentPosition();
-
-        if($this->isMarked($antPosition)) {
-            $this->unmarkPosition($antPosition);
-            $this->ant->forwardLeft();
-        } else {
-            $this->markPosition($antPosition);
-            $this->ant->forwardRight();
+        for($x = 0;$x<$this->length;$x++) { 
+            $antPosition = $this->ant->getCurrentPosition();
+            if($this->isMarked($antPosition)) {
+                $this->unmarkPosition($antPosition);
+                $this->ant->forwardLeft();
+            } else {
+                $this->markPosition($antPosition);
+                $this->ant->forwardRight();
+            }
         }
     }
 
