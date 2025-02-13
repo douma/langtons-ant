@@ -6,6 +6,12 @@ RUN git clone https://github.com/douma/langtons-ant src
 
 RUN apt-get update -y && apt-get install -y libpng-dev
 
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libzip-dev \
+    unzip
+RUN docker-php-ext-install zip
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git zip
 WORKDIR src
